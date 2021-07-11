@@ -1,6 +1,6 @@
 ﻿using Pluralize.NET.Core;
 
-namespace RabitMQTask.Data.Extensions
+namespace ApiTemplate.Data.Extensions
 {
     public static class PluralizerExtensions
     {

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using RabitMQTask.Core.DataTransforObjects.Jwt;
-using RabitMQTask.Model.Jwt;
+﻿using ApiTemplate.Core.DataTransforObjects.Jwt;
+using ApiTemplate.Model.Jwt;
 
-namespace RabitMQTask.Mapper.Jwt
+namespace ApiTemplate.Mapper.Jwt
 {
     public class JwtMapper
     {

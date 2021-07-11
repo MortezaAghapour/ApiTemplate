@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
-using RabitMQTask.Core.DataTransforObjects.Jwt;
-using RabitMQTask.Core.Entities.Users;
+using ApiTemplate.Core.DataTransforObjects.Jwt;
+using ApiTemplate.Core.Entities.Users;
 
-namespace RabitMQTask.Service.Jwt
+namespace ApiTemplate.Service.Jwt
 {
     public interface IJwtService
     {

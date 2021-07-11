@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace RabitMQTask.Core.Entities.Base
+namespace ApiTemplate.Core.Entities.Base
 {
     public abstract class BaseEntity  <TKey>:IEntity
     {

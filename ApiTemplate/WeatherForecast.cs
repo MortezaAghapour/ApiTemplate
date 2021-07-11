@@ -1,6 +1,6 @@
 using System;
 
-namespace RabitMQTask
+namespace ApiTemplate
 {
     public class WeatherForecast
     {

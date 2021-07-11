@@ -1,4 +1,4 @@
-﻿namespace RabitMQTask.Core.DataTransforObjects.Jwt
+﻿namespace ApiTemplate.Core.DataTransforObjects.Jwt
 {
     public class JwtReturnModel
     {

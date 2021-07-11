@@ -1,7 +1,7 @@
-﻿using RabitMQTask.Common.Enums.Exceptions;
-using System;
+﻿using System;
+using ApiTemplate.Common.Enums.Exceptions;
 
-namespace RabitMQTask.Common.Exceptions
+namespace ApiTemplate.Common.Exceptions
 {
     public class BadRequestException : AppException
     {

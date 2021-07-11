@@ -4,10 +4,10 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+using ApiTemplate.Core.Entities.Base;
 using Microsoft.EntityFrameworkCore.Query;
-using RabitMQTask.Core.Entities.Base;
 
-namespace RabitMQTask.Data.Repositories.Base
+namespace ApiTemplate.Data.Repositories.Base
 {
     public interface IRepository<T> where T:class,IEntity
     {

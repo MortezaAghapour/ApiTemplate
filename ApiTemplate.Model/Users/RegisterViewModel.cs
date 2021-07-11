@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace RabitMQTask.Model.Users
+namespace ApiTemplate.Model.Users
 {
     public class RegisterViewModel
     {

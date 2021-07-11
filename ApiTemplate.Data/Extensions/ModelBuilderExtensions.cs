@@ -2,7 +2,7 @@
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 
-namespace RabitMQTask.Data.Extensions
+namespace ApiTemplate.Data.Extensions
 {
     public static class ModelBuilderExtensions
     {

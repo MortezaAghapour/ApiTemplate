@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Reflection;
-using System.Threading;
 using System.Threading.Tasks;
+using ApiTemplate.Common.Exceptions;
+using ApiTemplate.Common.Markers.DependencyRegistrar;
+using ApiTemplate.Core.Entities.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using RabitMQTask.Common.Exceptions;
-using RabitMQTask.Common.Markers.DependencyRegistrar;
-using RabitMQTask.Core.Entities.Users;
-using RabitMQTask.Data.UnitOfWorks;
 
-namespace RabitMQTask.Service.Users
+namespace ApiTemplate.Service.Users
 {
     public class UserService : IUserService   ,IScopedDependency
     {

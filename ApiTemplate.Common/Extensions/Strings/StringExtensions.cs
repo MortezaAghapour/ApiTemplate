@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace RabitMQTask.Common.Extensions.Strings
+﻿namespace ApiTemplate.Common.Extensions.Strings
 {
     public static class StringExtensions
     {

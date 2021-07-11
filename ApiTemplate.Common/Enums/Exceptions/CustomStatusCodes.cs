@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RabitMQTask.Common.Enums.Exceptions
+namespace ApiTemplate.Common.Enums.Exceptions
 {
     public enum CustomStatusCodes
     {

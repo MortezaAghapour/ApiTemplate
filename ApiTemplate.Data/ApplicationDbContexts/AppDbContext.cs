@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ApiTemplate.Core.Entities.Base;
+using ApiTemplate.Core.Entities.Users;
+using ApiTemplate.Data.Extensions;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using RabitMQTask.Core.Entities.Base;
-using RabitMQTask.Core.Entities.Users;
-using RabitMQTask.Data.Extensions;
 
-namespace RabitMQTask.Data.ApplicationDbContexts
+namespace ApiTemplate.Data.ApplicationDbContexts
 {
     public class AppDbContext :IdentityDbContext<AppUser,AppRole,long,AppUserClaim,AppUserRole,AppUserLogin,AppRoleClaim,AppUserToken>
     {

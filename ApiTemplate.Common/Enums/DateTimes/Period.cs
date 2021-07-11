@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RabitMQTask.Common.Enums.DateTimes
+namespace ApiTemplate.Common.Enums.DateTimes
 {
     public enum Period
     {

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using RabitMQTask.Common.Markers.Configurations;
+﻿using ApiTemplate.Common.Markers.Configurations;
 
-namespace RabitMQTask.Core.Configurations.Jwt
+namespace ApiTemplate.Core.Configurations.Jwt
 {
     public class JwtConfiguration :IAppSetting
     {

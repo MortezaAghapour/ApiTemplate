@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace RabitMQTask.Data.Migrations
+namespace ApiTemplate.Data.Migrations
 {
     public partial class Initial : Migration
     {

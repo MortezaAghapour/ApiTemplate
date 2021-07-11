@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.AspNetCore.Identity;
-using RabitMQTask.Core.Entities.Base;
+﻿using Microsoft.AspNetCore.Identity;
 
-namespace RabitMQTask.Core.Entities.Users
+namespace ApiTemplate.Core.Entities.Users
 {
     public class AppUser   :IdentityUser<long>
     {

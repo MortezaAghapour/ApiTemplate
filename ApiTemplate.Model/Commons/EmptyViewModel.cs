@@ -1,4 +1,4 @@
-﻿namespace RabitMQTask.Model.Commons
+﻿namespace ApiTemplate.Model.Commons
 {
     public class EmptyViewModel
     {

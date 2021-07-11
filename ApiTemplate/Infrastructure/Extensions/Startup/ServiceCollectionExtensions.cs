@@ -1,44 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO.Compression;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using ApiTemplate.Common.Enums.Exceptions;
+using ApiTemplate.Common.Exceptions;
+using ApiTemplate.Common.Extensions.Identity;
+using ApiTemplate.Common.Extensions.Strings;
+using ApiTemplate.Common.Helpers;
+using ApiTemplate.Common.Markers.Configurations;
+using ApiTemplate.Common.Markers.DependencyRegistrar;
+using ApiTemplate.Core.Configurations.Identity;
+using ApiTemplate.Core.Configurations.Jwt;
+using ApiTemplate.Core.Configurations.RabitMq;
+using ApiTemplate.Core.Entities.Base;
+using ApiTemplate.Core.Entities.Users;
+using ApiTemplate.Data.ApplicationDbContexts;
+using ApiTemplate.Data.Repositories.Base;
+using ApiTemplate.Factory.Users;
+using ApiTemplate.Service.Users;
 using Autofac;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using RabitMQTask.Common.Enums.Exceptions;
-using RabitMQTask.Common.Exceptions;
-using RabitMQTask.Common.Extensions.Identity;
-using RabitMQTask.Common.Extensions.Strings;
-using RabitMQTask.Common.Helpers;
-using RabitMQTask.Common.Markers.Configurations;
-using RabitMQTask.Common.Markers.DependencyRegistrar;
-using RabitMQTask.Core.Configurations.Jwt;
-using RabitMQTask.Core.Configurations.Users;
-using RabitMQTask.Core.Entities.Base;
-using RabitMQTask.Core.Entities.Users;
-using RabitMQTask.Data.ApplicationDbContexts;
-using RabitMQTask.Data.Repositories.Base;
-using RabitMQTask.Data.UnitOfWorks;
-using RabitMQTask.Factory.Users;
-using RabitMQTask.Service.Users;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
-namespace RabitMQTask.Extensions.Startup
+namespace ApiTemplate.Infrastructure.Extensions.Startup
 {
     public static class ServiceCollectionExtensions
     {
@@ -127,6 +122,7 @@ namespace RabitMQTask.Extensions.Startup
         {
             services.ConfigureStartupConfig<JwtConfiguration>(configuration.GetSection(nameof(JwtConfiguration)));
             services.ConfigureStartupConfig<IdentityConfiguration>(configuration.GetSection(nameof(IdentityConfiguration)));
+            services.ConfigureStartupConfig<RabitMqConfiguration>(configuration.GetSection(nameof(RabitMqConfiguration)));
       
         }
         #endregion

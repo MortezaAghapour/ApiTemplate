@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace RabitMQTask.Model.Jwt
+﻿namespace ApiTemplate.Model.Jwt
 {
     public class JwtReturnViewModel
     {

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using ApiTemplate.Infrastructure.Extensions.Middlewares;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using RabitMQTask.Extensions.Middlewares;
 
-namespace RabitMQTask.Extensions.Startup
+namespace ApiTemplate.Infrastructure.Extensions.Startup
 {
     public static class PipelineExtension
     {

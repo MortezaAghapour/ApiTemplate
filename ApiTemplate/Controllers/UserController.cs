@@ -1,15 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using ApiTemplate.Factory.Users;
+using ApiTemplate.Model.Commons;
+using ApiTemplate.Model.Users;
 using Microsoft.AspNetCore.Authorization;
-using RabitMQTask.Extensions.ModelStates;
-using RabitMQTask.Factory.Users;
-using RabitMQTask.Model.Commons;
-using RabitMQTask.Model.Users;
+using Microsoft.AspNetCore.Mvc;
 
-namespace RabitMQTask.Controllers
+namespace ApiTemplate.Controllers
 {
     public class UserController : BaseController
     {

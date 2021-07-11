@@ -1,10 +1,7 @@
-﻿using RabitMQTask.Common.Enums.DateTimes;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using RabitMQTask.Common.Markers.Configurations;
+﻿using ApiTemplate.Common.Enums.DateTimes;
+using ApiTemplate.Common.Markers.Configurations;
 
-namespace RabitMQTask.Core.Configurations.Users
+namespace ApiTemplate.Core.Configurations.Identity
 {
     public class IdentityConfiguration : IAppSetting
     {

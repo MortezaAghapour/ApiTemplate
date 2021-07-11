@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using RabitMQTask.Common.Markers.DependencyRegistrar;
-using RabitMQTask.Data.ApplicationDbContexts;
+using ApiTemplate.Common.Markers.DependencyRegistrar;
+using ApiTemplate.Data.ApplicationDbContexts;
+using ApiTemplate.Data.Repositories.Weathers;
 
-using RabitMQTask.Data.Repositories.Weathers;
-
-namespace RabitMQTask.Data.UnitOfWorks
+namespace ApiTemplate.Data.UnitOfWorks
 {
     public class UnitOfWork : IUnitOfWork  ,IScopedDependency
     {

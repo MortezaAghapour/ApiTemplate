@@ -1,4 +1,4 @@
-﻿namespace RabitMQTask.Common.Markers.DependencyRegistrar
+﻿namespace ApiTemplate.Common.Markers.DependencyRegistrar
 {
     public interface IScopedDependency
     {

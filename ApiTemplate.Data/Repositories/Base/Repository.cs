@@ -5,13 +5,13 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using ApiTemplate.Common.Exceptions;
+using ApiTemplate.Core.Entities.Base;
+using ApiTemplate.Data.ApplicationDbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
-using RabitMQTask.Common.Exceptions;
-using RabitMQTask.Core.Entities.Base;
-using RabitMQTask.Data.ApplicationDbContexts;
 
-namespace RabitMQTask.Data.Repositories.Base
+namespace ApiTemplate.Data.Repositories.Base
 {
     public class Repository<T> : IRepository<T> where T : class, IEntity
     {

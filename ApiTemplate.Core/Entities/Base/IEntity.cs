@@ -1,4 +1,4 @@
-﻿namespace RabitMQTask.Core.Entities.Base
+﻿namespace ApiTemplate.Core.Entities.Base
 {
     public interface IEntity
     {

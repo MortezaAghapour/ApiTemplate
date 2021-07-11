@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using RabitMQTask.Core.Entities.Base;
+﻿using ApiTemplate.Core.Entities.Base;
 
-namespace RabitMQTask.Core.Entities.Weathers
+namespace ApiTemplate.Core.Entities.Weathers
 {
     public class Weather   :BaseEntity
     {

@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Security.Claims;
 using System.Security.Principal;
-using System.Text;
-using RabitMQTask.Common.Extensions.Strings;
 
-namespace RabitMQTask.Common.Extensions.Identity
+namespace ApiTemplate.Common.Extensions.Identity
 {
     public static class IdentityExtensions
     {

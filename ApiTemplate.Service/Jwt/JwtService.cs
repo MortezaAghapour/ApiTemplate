@@ -5,14 +5,14 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using ApiTemplate.Common.Markers.DependencyRegistrar;
+using ApiTemplate.Core.Configurations.Jwt;
+using ApiTemplate.Core.DataTransforObjects.Jwt;
+using ApiTemplate.Core.Entities.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
-using RabitMQTask.Common.Markers.DependencyRegistrar;
-using RabitMQTask.Core.Configurations.Jwt;
-using RabitMQTask.Core.DataTransforObjects.Jwt;
-using RabitMQTask.Core.Entities.Users;
 
-namespace RabitMQTask.Service.Jwt
+namespace ApiTemplate.Service.Jwt
 {
     public class JwtService : IJwtService ,IScopedDependency
     {

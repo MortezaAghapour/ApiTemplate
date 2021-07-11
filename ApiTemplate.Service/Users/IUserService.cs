@@ -1,9 +1,8 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using ApiTemplate.Core.Entities.Users;
 using Microsoft.AspNetCore.Identity;
-using RabitMQTask.Core.Entities.Users;
 
-namespace RabitMQTask.Service.Users
+namespace ApiTemplate.Service.Users
 {
     public interface IUserService
     {

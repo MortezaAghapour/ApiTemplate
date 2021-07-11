@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ApiTemplate.Core.Entities.Weathers;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using RabitMQTask.Core.Entities.Weathers;
 
-namespace RabitMQTask.Data.Configurations.Weathers
+namespace ApiTemplate.Data.Configurations.Weathers
 {
     public class WeatherConfiguration  :IEntityTypeConfiguration<Weather>
     {

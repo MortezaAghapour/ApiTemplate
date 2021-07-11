@@ -1,4 +1,4 @@
-﻿namespace RabitMQTask.Common.Markers.Configurations
+﻿namespace ApiTemplate.Common.Markers.Configurations
 {
     public interface IAppSetting
     {

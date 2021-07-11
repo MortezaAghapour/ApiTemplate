@@ -1,16 +1,15 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using RabitMQTask.Common.Markers.DependencyRegistrar;
-using RabitMQTask.Core.Entities.Users;
-using RabitMQTask.Mapper.Jwt;
-using RabitMQTask.Model.Commons;
-using RabitMQTask.Model.Jwt;
-using RabitMQTask.Model.Users;
-using RabitMQTask.Service.Jwt;
-using RabitMQTask.Service.Users;
+using ApiTemplate.Common.Markers.DependencyRegistrar;
+using ApiTemplate.Core.Entities.Users;
+using ApiTemplate.Mapper.Jwt;
+using ApiTemplate.Model.Commons;
+using ApiTemplate.Model.Jwt;
+using ApiTemplate.Model.Users;
+using ApiTemplate.Service.Jwt;
+using ApiTemplate.Service.Users;
 
-namespace RabitMQTask.Factory.Users
+namespace ApiTemplate.Factory.Users
 {
     public class UserFactory : IUserFactory, IScopedDependency
     {

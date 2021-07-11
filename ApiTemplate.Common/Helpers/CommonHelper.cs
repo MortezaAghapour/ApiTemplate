@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using RabitMQTask.Common.Enums.DateTimes;
+using ApiTemplate.Common.Enums.DateTimes;
 
-namespace RabitMQTask.Common.Helpers
+namespace ApiTemplate.Common.Helpers
 {
     public class CommonHelper
     {

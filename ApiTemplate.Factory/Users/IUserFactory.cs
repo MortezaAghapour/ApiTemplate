@@ -1,10 +1,9 @@
 ﻿using System.Threading.Tasks;
-using RabitMQTask.Model.Commons;
-using RabitMQTask.Model.Jwt;
-using RabitMQTask.Model.Users;
+using ApiTemplate.Model.Commons;
+using ApiTemplate.Model.Jwt;
+using ApiTemplate.Model.Users;
 
-
-namespace RabitMQTask.Factory.Users
+namespace ApiTemplate.Factory.Users
 {
     public interface IUserFactory
     {

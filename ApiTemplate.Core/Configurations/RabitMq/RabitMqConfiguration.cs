@@ -1,0 +1,12 @@
+﻿using ApiTemplate.Common.Markers.Configurations;
+
+namespace ApiTemplate.Core.Configurations.RabitMq
+{
+    public class RabitMqConfiguration :IAppSetting
+    {
+        public string Host { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public int Port { get; set; }
+    }
+}

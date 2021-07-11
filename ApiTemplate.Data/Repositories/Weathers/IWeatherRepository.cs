@@ -1,7 +1,7 @@
-﻿using RabitMQTask.Core.Entities.Weathers;
-using RabitMQTask.Data.Repositories.Base;
+﻿using ApiTemplate.Core.Entities.Weathers;
+using ApiTemplate.Data.Repositories.Base;
 
-namespace RabitMQTask.Data.Repositories.Weathers
+namespace ApiTemplate.Data.Repositories.Weathers
 {
     public interface IWeatherRepository  :IRepository<Weather>
     {

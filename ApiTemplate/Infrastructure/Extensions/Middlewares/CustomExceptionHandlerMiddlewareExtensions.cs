@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using ApiTemplate.Infrastructure.Middlewares;
 using Microsoft.AspNetCore.Builder;
-using RabitMQTask.Middlewares;
 
-namespace RabitMQTask.Extensions.Middlewares
+namespace ApiTemplate.Infrastructure.Extensions.Middlewares
 {
     public static class CustomExceptionHandlerMiddlewareExtensions
     {

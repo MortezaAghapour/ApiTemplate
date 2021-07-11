@@ -1,9 +1,9 @@
-﻿using RabitMQTask.Common.Markers.DependencyRegistrar;
-using RabitMQTask.Core.Entities.Weathers;
-using RabitMQTask.Data.ApplicationDbContexts;
-using RabitMQTask.Data.Repositories.Base;
+﻿using ApiTemplate.Common.Markers.DependencyRegistrar;
+using ApiTemplate.Core.Entities.Weathers;
+using ApiTemplate.Data.ApplicationDbContexts;
+using ApiTemplate.Data.Repositories.Base;
 
-namespace RabitMQTask.Data.Repositories.Weathers
+namespace ApiTemplate.Data.Repositories.Weathers
 {
     public class WeatherRepository : Repository<Weather>,IWeatherRepository ,IScopedDependency
     {
