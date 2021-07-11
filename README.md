@@ -1,21 +1,40 @@
 # ApiTemplate
-
+<div>
 تمپلیتی به صورت Api که به مرور زمان امکاناتی اضاف خواهد شد
+</div>
 
+<div>
 این تمپلیت به صورت چندلایه نوشته شده 
 
+</div>
 
+<h3>
 لایه های استفاده شده:
-1-Common
-2-Core
-3-Data
-4-Model
-5-Mapper
-6-Service
-7-Factory
-8-Web
+
+</h3>
+
+<ul>
  
+ <li>Common</li>
+ <li>Core</li>
+ <li>Data</li>
+ <li>Model</li>
+ <li>Mapper</li>
+ <li>Service</li>
+ <li>Factory</li>
+ <li>Web</li>
+ 
+ </ul>
+ 
+ 
+<h3>
  در این تمپلیت موارد زیر استفاده شده : 
- 1-jwt
- 2-identity
- 3-ef
+</h3>
+ 
+ <ul>
+ 
+ <li>jwt </li>
+ <li>identity</li>
+ <li>ef</li>
+ </ul>
+
