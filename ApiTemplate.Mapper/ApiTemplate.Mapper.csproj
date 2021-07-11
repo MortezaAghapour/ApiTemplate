@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ApiTemplate.Core\ApiTemplate.Core.csproj" />
+    <ProjectReference Include="..\ApiTemplate.Model\ApiTemplate.Model.csproj" />
+  </ItemGroup>
+
+</Project>
