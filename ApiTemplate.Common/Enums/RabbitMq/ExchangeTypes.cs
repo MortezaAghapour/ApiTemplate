@@ -1,4 +1,4 @@
-﻿namespace ApiTemplate.Common.Enums.RabitMq
+﻿namespace ApiTemplate.Common.Enums.RabbitMq
 {
     public enum ExchangeTypes
     {

@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Text;
 using System.Threading.Tasks;
-using ApiTemplate.Common.Enums.RabitMq;
+using ApiTemplate.Common.Enums.RabbitMq;
 using ApiTemplate.Common.Markers.DependencyRegistrar;
 using ApiTemplate.Core.Configurations.RabitMq;
-using ApiTemplate.Core.DataTransforObjects.RabitMq;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
-namespace ApiTemplate.Service.RabitMq
+namespace ApiTemplate.Service.RabbitMq
 {
-    public class RabitMqService : IRabitMqService, IScopedDependency
+    public class RabbitMqService : IRabbitMqService, IScopedDependency, IDisposable
     {
         #region Fields
-        private readonly RabitMqConfiguration _rabitMqConfiguration;
+        private readonly RabitMqConfiguration _rabbitMqConfiguration;
         private IConnectionFactory _connectionFactory;
         private IConnection _connection;
         private IModel _model;
@@ -23,9 +22,9 @@ namespace ApiTemplate.Service.RabitMq
         #endregion
 
         #region Constructors
-        public RabitMqService(RabitMqConfiguration rabitMqConfiguration)
+        public RabbitMqService(RabitMqConfiguration rabbitMqConfiguration)
         {
-            _rabitMqConfiguration = rabitMqConfiguration;
+            _rabbitMqConfiguration = rabbitMqConfiguration;
         }
         #endregion
         #region Methods
@@ -33,11 +32,11 @@ namespace ApiTemplate.Service.RabitMq
         {
             _connectionFactory = new ConnectionFactory
             {
-                HostName = _rabitMqConfiguration.Host,
-                UserName = _rabitMqConfiguration.UserName,
-                Password = _rabitMqConfiguration.Password,
+                HostName = _rabbitMqConfiguration.Host,
+                UserName = _rabbitMqConfiguration.UserName,
+                Password = _rabbitMqConfiguration.Password,
                 DispatchConsumersAsync = true,
-                Port = _rabitMqConfiguration.Port
+                Port = _rabbitMqConfiguration.Port
             };
 
             _connection = _connectionFactory.CreateConnection();
@@ -53,7 +52,7 @@ namespace ApiTemplate.Service.RabitMq
                     _model.ExchangeDeclare(ExchangeName, ExchangeType.Fanout, true);
                     break;
                 default:
-                   break;
+                    break;
             }
 
         }
@@ -72,15 +71,15 @@ namespace ApiTemplate.Service.RabitMq
          */
             switch (type)
             {
-               
-                case ExchangeTypes.Direct:
-                {
-                    var basicProperties = _model.CreateBasicProperties();
-                    basicProperties.Persistent = true;
 
-                    _model.BasicPublish(string.Empty, QueueName, false, basicProperties, byteMessage);
-                    break;
-                }
+                case ExchangeTypes.Direct:
+                    {
+                        var basicProperties = _model.CreateBasicProperties();
+                        basicProperties.Persistent = true;
+
+                        _model.BasicPublish(string.Empty, QueueName, false, basicProperties, byteMessage);
+                        break;
+                    }
                 case ExchangeTypes.Fanout:
                     _model.BasicPublish(ExchangeName, string.Empty, false, null, byteMessage);
                     break;
@@ -88,15 +87,7 @@ namespace ApiTemplate.Service.RabitMq
                     break;
             }
 
-            if (_model.IsOpen)
-            {
-                _model.Close();
-            }
 
-            if (_connection.IsOpen)
-            {
-                _connection.Close();
-            }
         }
 
         public async Task<T> ReadMessage<T>(ExchangeTypes type) where T : class
@@ -113,7 +104,7 @@ namespace ApiTemplate.Service.RabitMq
                     _model.QueueBind(queueName, ExchangeName, string.Empty);
                     break;
                 default:
-                   break;
+                    break;
             }
 
             var consumer = new AsyncEventingBasicConsumer(_model);
@@ -135,6 +126,14 @@ namespace ApiTemplate.Service.RabitMq
                 default:
                     break;
             }
+
+
+            return await Task.FromResult(result);
+        }
+
+
+        public void Dispose()
+        {
             if (_model.IsOpen)
             {
                 _model.Close();
@@ -143,14 +142,10 @@ namespace ApiTemplate.Service.RabitMq
             {
                 _connection.Close();
             }
-
-            return await Task.FromResult(result);
         }
 
-
-
-
         #endregion
+
 
     }
 }
