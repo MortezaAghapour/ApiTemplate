@@ -33,8 +33,9 @@
  
  <ul>
  
- <li>jwt </li>
+ <li>jwt</li>
  <li>identity</li>
  <li>ef</li>
+  <li>rabitmq</li>
  </ul>
 
