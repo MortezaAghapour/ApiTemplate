@@ -1,6 +1,9 @@
 # ApiTemplate
-<div>
-تمپلیتی به صورت Api که به مرور زمان امکاناتی اضاف خواهد شد
+<div >
+ <p style="direction:rtl">
+ تمپلیتی به صورت Api که به مرور زمان امکاناتی اضاف خواهد شد
+
+ </p>
 </div>
 
 <div>
@@ -33,8 +36,9 @@
  
  <ul>
  
- <li>jwt </li>
+ <li>jwt</li>
  <li>identity</li>
  <li>ef</li>
+  <li>rabitmq</li>
  </ul>
 
