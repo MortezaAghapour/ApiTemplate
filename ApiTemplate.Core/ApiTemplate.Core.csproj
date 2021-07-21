@@ -12,8 +12,4 @@
     <ProjectReference Include="..\ApiTemplate.Common\ApiTemplate.Common.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DataTransforObjects\Rest\" />
-  </ItemGroup>
-
 </Project>

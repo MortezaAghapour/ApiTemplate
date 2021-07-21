@@ -77,7 +77,10 @@ namespace ApiTemplate.Infrastructure.Extensions.Startup
             services.AddAppSettingConfigurations(configuration);
             //most of API providers require TLS 1.2 nowadays
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-          
+
+            //register http client
+            services.AddHttpClient();
+
             //add DbContext Configurations
             services.AddDbContextConfiguration(configuration);
             services.AddIdentityConfiguration(configuration);
