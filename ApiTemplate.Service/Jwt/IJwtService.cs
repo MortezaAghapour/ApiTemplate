@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
-using ApiTemplate.Core.DataTransforObjects.Jwt;
+
 using ApiTemplate.Core.Entities.Users;
+using ApiTemplate.Model.Jwt;
 
 namespace ApiTemplate.Service.Jwt
 {

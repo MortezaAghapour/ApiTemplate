@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ApiTemplate.Model.Users
 {
-    public class RegisterViewModel
+    public class RegisterModel
     {
         [Required(ErrorMessage = "فیلد {0} نمی تواند خالی باشد")]
         [DisplayName("نام")]

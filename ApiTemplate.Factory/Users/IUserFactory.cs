@@ -7,7 +7,7 @@ namespace ApiTemplate.Factory.Users
 {
     public interface IUserFactory
     {
-        Task<ResultViewModel<JwtReturnViewModel>> Login(LoginViewModel model);
-        Task<ResultViewModel<EmptyViewModel>> Register(RegisterViewModel model);
+        Task<ReturnModel<JwtReturnModel>> Login(LoginModel model);
+        Task<ReturnModel<EmptyModel>> Register(RegisterModel model);
     }
 }

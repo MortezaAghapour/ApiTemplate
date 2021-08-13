@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Text;
+﻿using System.Net;
 
-namespace ApiTemplate.Core.DataTransforObjects.Rest
+namespace ApiTemplate.Model.Rest
 {
     public class ResponseModel<T> where T:class
     {
+        public bool IsSuccess { get; set; }
         public string Message { get; set; }
         public HttpStatusCode Code { get; set; }
         public T Data { get; set; }

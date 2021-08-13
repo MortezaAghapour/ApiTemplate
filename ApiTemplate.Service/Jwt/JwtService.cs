@@ -7,8 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using ApiTemplate.Common.Markers.DependencyRegistrar;
 using ApiTemplate.Core.Configurations.Jwt;
-using ApiTemplate.Core.DataTransforObjects.Jwt;
+
 using ApiTemplate.Core.Entities.Users;
+using ApiTemplate.Model.Jwt;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using ApiTemplate.Common.Enums.Exceptions;
 using ApiTemplate.Common.Exceptions;
 using ApiTemplate.Model.Commons;
 using Microsoft.AspNetCore.Http;
@@ -29,15 +30,19 @@ namespace ApiTemplate.Infrastructure.Middlewares
             }
             catch (NotFoundException exception)
             {
-        
-              var result = new ResultViewModel<EmptyViewModel>
-              {
-                  IsSuccess = false,
-                  Errors = new List<string>
-                  {
-                      "آبجکت مورد نظر شما یافت نشد"
-                  }
-              };
+                var errors = new List<string>
+                {
+                    "آبجکت مورد نظر شما یافت نشد"
+                };
+                var result = new ResultModel<EmptyModel>(isSuccess: false, statusCode: CustomStatusCodes.NotFound,
+                    errors: errors, data: default);
+              //{
+              //    IsSuccess = false,
+              //    Errors = new List<string>
+              //    {
+              //        "آبجکت مورد نظر شما یافت نشد"
+              //    }
+              //};
               var json = JsonConvert.SerializeObject(result);
                 //log error in database 
                 context.Response.ContentType = "application/json";
@@ -45,15 +50,20 @@ namespace ApiTemplate.Infrastructure.Middlewares
             }
             catch (BadRequestException exception)
             {
-       
-                var result = new ResultViewModel<EmptyViewModel>
+                var errors = new List<string>
                 {
-                    IsSuccess = false,
-                    Errors = new List<string>
-                    {
-                        "خطایی در پارامترهای ارسالی وجود دارد"
-                    }
+                    "خطایی در پارامترهای ارسالی وجود دارد"
                 };
+                var result = new ResultModel<EmptyModel>(isSuccess: false, statusCode: CustomStatusCodes.BadRequest,
+                    errors: errors, data: default);
+                //var result = new ReturnModel<EmptyModel>
+                //{
+                //    IsSuccess = false,
+                //    Errors = new List<string>
+                //    {
+                //        "خطایی در پارامترهای ارسالی وجود دارد"
+                //    }
+                //};
                 var json = JsonConvert.SerializeObject(result);
                 //log error in database 
                 context.Response.ContentType = "application/json";
@@ -62,15 +72,21 @@ namespace ApiTemplate.Infrastructure.Middlewares
             }
             catch (AppException exception)
             {
-                
-                var result = new ResultViewModel<EmptyViewModel>
+
+                var errors = new List<string>
                 {
-                    IsSuccess = false,
-                    Errors = new List<string>
-                    {
-                        "خطایی درپردازش رخ داده است"
-                    }
+                    "خطایی درپردازش رخ داده است"
                 };
+                var result = new ResultModel<EmptyModel>(isSuccess: false, statusCode: CustomStatusCodes.ServerError,
+                    errors: errors, data: default);
+                //var result = new ReturnModel<EmptyModel>
+                //{
+                //    IsSuccess = false,
+                //    Errors = new List<string>
+                //    {
+                //        "خطایی درپردازش رخ داده است"
+                //    }
+                //};
                 var json = JsonConvert.SerializeObject(result);
                 //log error in database 
                 context.Response.ContentType = "application/json";
@@ -78,14 +94,20 @@ namespace ApiTemplate.Infrastructure.Middlewares
             }
             catch (Exception exception)
             {
-                var result = new ResultViewModel<EmptyViewModel>
+                var errors = new List<string>
                 {
-                    IsSuccess = false,
-                    Errors = new List<string>
-                    {
-                        "خطایی نامعلوم وجود دارد"
-                    }
+                    "خطایی نامعلوم وجود دارد"
                 };
+                var result = new ResultModel<EmptyModel>(isSuccess: false, statusCode: CustomStatusCodes.UnKnown,
+                    errors: errors, data: default);
+                //var result = new ReturnModel<EmptyModel>
+                //{
+                //    IsSuccess = false,
+                //    Errors = new List<string>
+                //    {
+                //        "خطایی نامعلوم وجود دارد"
+                //    }
+                //};
                 var json = JsonConvert.SerializeObject(result);
                 //log error in database 
                 context.Response.ContentType = "application/json";

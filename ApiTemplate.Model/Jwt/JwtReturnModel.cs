@@ -1,6 +1,6 @@
 ﻿namespace ApiTemplate.Model.Jwt
 {
-    public class JwtReturnViewModel
+    public class JwtReturnModel
     {
         public string AccessToken { get; set; }
         public string RefreshToken { get; set; }

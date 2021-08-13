@@ -118,7 +118,7 @@ namespace ApiTemplate.Service.RabbitMq
             switch (type)
             {
                 case ExchangeTypes.Direct:
-                    _model.BasicConsume(QueueName, false, consumer);
+                    _model.BasicConsume(QueueName, true, consumer);
                     break;
                 case ExchangeTypes.Fanout:
                     _model.BasicConsume(queueName, true, consumer);

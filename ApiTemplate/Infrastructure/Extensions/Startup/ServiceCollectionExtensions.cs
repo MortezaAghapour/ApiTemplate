@@ -15,13 +15,18 @@ using ApiTemplate.Common.Markers.DependencyRegistrar;
 using ApiTemplate.Core.Configurations.Identity;
 using ApiTemplate.Core.Configurations.Jwt;
 using ApiTemplate.Core.Configurations.RabitMq;
+using ApiTemplate.Core.Configurations.Weathers;
 using ApiTemplate.Core.Entities.Base;
 using ApiTemplate.Core.Entities.Users;
 using ApiTemplate.Data.ApplicationDbContexts;
 using ApiTemplate.Data.Repositories.Base;
 using ApiTemplate.Factory.Users;
+using ApiTemplate.Model.Commons;
 using ApiTemplate.Service.Users;
 using Autofac;
+using FluentValidation.AspNetCore;
+using Hangfire;
+using Hangfire.SqlServer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
@@ -42,9 +47,9 @@ namespace ApiTemplate.Infrastructure.Extensions.Startup
         {
 
             containerBuilder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>)).InstancePerLifetimeScope();
-           // containerBuilder.RegisterType<IUnitOfWork>().As<UnitOfWork>().SingleInstance();
-        
-           
+            // containerBuilder.RegisterType<IUnitOfWork>().As<UnitOfWork>().SingleInstance();
+
+
 
             var commonAssembly = typeof(AppException).Assembly;
             var coreAssembly = typeof(IEntity).Assembly;
@@ -54,17 +59,17 @@ namespace ApiTemplate.Infrastructure.Extensions.Startup
             var webAssembly = typeof(Program).Assembly;
 
 
-            containerBuilder.RegisterAssemblyTypes(commonAssembly, coreAssembly, dataAssembly, serviceAssembly, factoryAssembly,  webAssembly)
+            containerBuilder.RegisterAssemblyTypes(commonAssembly, coreAssembly, dataAssembly, serviceAssembly, factoryAssembly, webAssembly)
                 .AssignableTo<IScopedDependency>()
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
 
-            containerBuilder.RegisterAssemblyTypes(commonAssembly, coreAssembly, dataAssembly, serviceAssembly, factoryAssembly,  webAssembly)
+            containerBuilder.RegisterAssemblyTypes(commonAssembly, coreAssembly, dataAssembly, serviceAssembly, factoryAssembly, webAssembly)
                 .AssignableTo<ITransientDependency>()
                 .AsImplementedInterfaces()
                 .InstancePerDependency();
 
-            containerBuilder.RegisterAssemblyTypes(commonAssembly, coreAssembly, dataAssembly, serviceAssembly, factoryAssembly,  webAssembly)
+            containerBuilder.RegisterAssemblyTypes(commonAssembly, coreAssembly, dataAssembly, serviceAssembly, factoryAssembly, webAssembly)
                 .AssignableTo<ISingletonDependency>()
                 .AsImplementedInterfaces()
                 .SingleInstance();
@@ -87,18 +92,21 @@ namespace ApiTemplate.Infrastructure.Extensions.Startup
             services.AddEfServices();
             //add Response Compression
             services.AddResponseCompressionConfigurations();
-          
-           
-          
-           services.AddCors();
-           services.AddControllers();
-           services.AddAuthorization();
-           services.AddJwtAuthentication(configuration);
+
+
+
+            services.AddCors();
+            services.AddControllers().AddFluentValidation(
+                options => { options.RegisterValidatorsFromAssembly(typeof(EmptyModel).Assembly); }
+                );
+            services.AddAuthorization();
+            services.AddHangFireConfig(configuration);
+            services.AddJwtAuthentication(configuration);
         }
         #region Configure Configs
 
         public static TConfig ConfigureStartupConfig<TConfig>(this IServiceCollection services,
-            IConfiguration configuration) where TConfig : class ,IAppSetting ,new()  
+            IConfiguration configuration) where TConfig : class, IAppSetting, new()
         {
             if (services == null)
                 throw new ArgumentNullException(nameof(services));
@@ -126,7 +134,8 @@ namespace ApiTemplate.Infrastructure.Extensions.Startup
             services.ConfigureStartupConfig<JwtConfiguration>(configuration.GetSection(nameof(JwtConfiguration)));
             services.ConfigureStartupConfig<IdentityConfiguration>(configuration.GetSection(nameof(IdentityConfiguration)));
             services.ConfigureStartupConfig<RabitMqConfiguration>(configuration.GetSection(nameof(RabitMqConfiguration)));
-      
+            services.ConfigureStartupConfig<WeatherConfiguration>(configuration.GetSection(nameof(WeatherConfiguration)));
+
         }
         #endregion
         #region Ef Services
@@ -197,12 +206,29 @@ namespace ApiTemplate.Infrastructure.Extensions.Startup
             //    // enables immediate logout, after updating the user's stat.
             //    options.ValidationInterval = TimeSpan.Zero;
             //});
-        }                                
+        }
 
+        #endregion
+        #region Hangfire Config
+
+        public static void AddHangFireConfig(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddHangfire(x =>
+                x.UseSqlServerStorage(configuration.GetConnectionString("DefaultConnection"), new SqlServerStorageOptions
+                {
+                    JobExpirationCheckInterval = TimeSpan.FromDays(1),
+                    SlidingInvisibilityTimeout = TimeSpan.FromDays(1),
+                    QueuePollInterval = TimeSpan.Zero,
+                    UseRecommendedIsolationLevel = true,
+                    UsePageLocksOnDequeue = true,
+                    DisableGlobalLocks = true
+                }));
+            services.AddHangfireServer();
+        }
         #endregion
         #region  Jwt Configuration
 
-        public static void AddJwtAuthentication(this IServiceCollection services, IConfiguration configuration) 
+        public static void AddJwtAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
             var jwtConfiguration = configuration.GetSection(nameof(JwtConfiguration)).Get<JwtConfiguration>();
             services.AddAuthentication(options =>
@@ -242,7 +268,7 @@ namespace ApiTemplate.Infrastructure.Extensions.Startup
                 {
                     OnAuthenticationFailed = context =>
                     {
-                        
+
                         if (context.Exception != null)
                             throw new AppException(CustomStatusCodes.UnAuthorized, "Authentication failed.", HttpStatusCode.Unauthorized, context.Exception, null);
 
@@ -265,7 +291,7 @@ namespace ApiTemplate.Infrastructure.Extensions.Startup
                         var userId = claimsIdentity.GetUserId<int>();
                         var user = await userService.GetUserById(userId);
 
-                        if (!user.SecurityStamp .Equals(securityStamp))
+                        if (!user.SecurityStamp.Equals(securityStamp))
                             context.Fail("Token security stamp is not valid.");
 
                         var validatedUser = await signInManager.ValidateSecurityStampAsync(context.Principal);
@@ -273,8 +299,8 @@ namespace ApiTemplate.Infrastructure.Extensions.Startup
                             context.Fail("Token security stamp is not valid.");
 
                         if (user.LockoutEnabled)
-                            context.Fail("User is Lockout"); 
-                       
+                            context.Fail("User is Lockout");
+
                     },
                     OnChallenge = context =>
                     {

@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using ApiTemplate.Factory.Users;
+using ApiTemplate.Infrastructure.Extensions.ModelStates;
 using ApiTemplate.Model.Commons;
 using ApiTemplate.Model.Users;
 using Microsoft.AspNetCore.Authorization;
@@ -31,14 +32,12 @@ namespace ApiTemplate.Controllers
 
         [HttpPost("[action]")]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        public async Task<IActionResult> Login(LoginModel model)
         {
             if (!ModelState.IsValid)
-                return BadRequest(new ResultViewModel<EmptyViewModel>
-                {
-                    IsSuccess = false,
-                    Errors = ModelState.GetModelStateErrors()
-                });
+                return BadRequest(
+                   ModelState.GetModelStateErrors()
+                );
             var login =await _userFactory.Login(model);
             if (login.IsSuccess)
             {
@@ -51,14 +50,12 @@ namespace ApiTemplate.Controllers
         }
         [HttpPost("[action]")]
         [AllowAnonymous]
-        public async Task<IActionResult> Register(RegisterViewModel model)
+        public async Task<IActionResult> Register(RegisterModel model)
         {
             if (!ModelState.IsValid)
-                return BadRequest(new ResultViewModel<EmptyViewModel>
-                {
-                    IsSuccess = false,
-                    Errors = ModelState.GetModelStateErrors()
-                });
+                return BadRequest(   
+                     ModelState.GetModelStateErrors()
+                );
             var register =await _userFactory.Register(model);
             if (register.IsSuccess)
             {

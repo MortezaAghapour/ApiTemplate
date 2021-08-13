@@ -13,7 +13,7 @@ namespace RabitMQTask.Data.Migrations
     [Migration("20210710174430_Initial")]
     partial class Initial
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected  void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

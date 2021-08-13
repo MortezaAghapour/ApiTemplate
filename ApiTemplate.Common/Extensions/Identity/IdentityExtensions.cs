@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Security.Claims;
 using System.Security.Principal;
+using ApiTemplate.Common.Extensions.Strings;
 
 namespace ApiTemplate.Common.Extensions.Identity
 {

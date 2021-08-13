@@ -1,14 +1,17 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using ApiTemplate.Common.Markers.DependencyRegistrar;
 using ApiTemplate.Common.Resources;
-using ApiTemplate.Core.DataTransforObjects.Rest;
+using ApiTemplate.Model.Rest;
 using ApiTemplate.Service.Logs;
+
 using Newtonsoft.Json;
 using Polly;
 using Polly.CircuitBreaker;
@@ -28,7 +31,7 @@ namespace ApiTemplate.Service.Rests
 
         #endregion
         #region Constructors
-        public RestService(HttpClient httpClient, IHttpClientFactory httpClientFactory, ILogService logService)
+        public RestService(IHttpClientFactory httpClientFactory, ILogService logService)
         {
             _httpClientFactory = httpClientFactory;
             _logService = logService;
@@ -56,7 +59,7 @@ namespace ApiTemplate.Service.Rests
         }
         #endregion
         #region Methods
-        public async Task<ResponseModel<TResult>> Call<TResult, TParam>(CallParameterModel<TParam> parameter) where TResult : class
+        public async Task<ResponseModel<TResult>> CallPost<TResult, TParam>(CallParameterModel<TParam> parameter, CancellationToken cancellationToken = default) where TResult : class
         {
             var httpClient = _httpClientFactory.CreateClient();
             StringContent content = null;
@@ -65,8 +68,9 @@ namespace ApiTemplate.Service.Rests
             httpClient.DefaultRequestHeaders.Clear();
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             httpClient.Timeout = new TimeSpan(0, 10, 0);
-            if (parameter.HasApiKey)
+            if (parameter.HasApiKey&&parameter.SendApiKeyByHeader)
             {
+
                 httpClient.DefaultRequestHeaders.Add(parameter.ApiKeyName, parameter.ApiKeyValue);
             }
             if (!string.IsNullOrEmpty(parameter.BearerToken))
@@ -83,7 +87,7 @@ namespace ApiTemplate.Service.Rests
             //using polly
 
             var result = await _fallbackPolicy.ExecuteAsync(() => _retryPolicy.ExecuteAsync(() =>
-                CircuitBreakerPolicy().ExecuteAsync(() => httpClient.PostAsync(parameter.ApiName, content))));
+                CircuitBreakerPolicy().ExecuteAsync(() =>httpClient.PostAsync(parameter.ApiName, content,cancellationToken))));
 
             if (result.IsSuccessStatusCode)
             {
@@ -91,6 +95,7 @@ namespace ApiTemplate.Service.Rests
                 var deserializeData = JsonConvert.DeserializeObject<TResult>(readDataAsString);
                 return new ResponseModel<TResult>
                 {
+                    IsSuccess = result.IsSuccessStatusCode,
                     Message = result.ReasonPhrase,
                     Code = result.StatusCode,
                     Data = deserializeData
@@ -100,6 +105,62 @@ namespace ApiTemplate.Service.Rests
             {
                 return new ResponseModel<TResult>
                 {
+                    IsSuccess =false,
+                    Code = result.StatusCode,
+                    Message = result.ReasonPhrase,
+                    Data = null
+                };
+            }
+        }
+
+        public async Task<ResponseModel<TResult>> CallSend<TResult>(SendParameterModel parameter, CancellationToken cancellationToken = default) where TResult : class
+        {
+            var httpClient = _httpClientFactory.CreateClient();
+          
+            var baseAddress = new Uri(parameter.BaseAddress);
+            httpClient.BaseAddress = baseAddress;
+            httpClient.DefaultRequestHeaders.Clear();
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            httpClient.Timeout = new TimeSpan(0, 10, 0);
+            if (parameter.HasApiKey && parameter.SendApiKeyByHeader)
+            {
+                httpClient.DefaultRequestHeaders.Add(parameter.ApiKeyName, parameter.ApiKeyValue);
+            }
+            if (!string.IsNullOrEmpty(parameter.BearerToken))
+            {
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue($"Bearer {parameter.BearerToken}");
+            }
+            var httpResponseMessage=new HttpRequestMessage
+            {
+                Method = parameter.Method
+            };
+            if (!string.IsNullOrEmpty(parameter.QueryString))
+            {
+                httpResponseMessage.RequestUri=new Uri($"{httpClient.BaseAddress}/{parameter.ApiName}?{parameter.QueryString}");
+            }
+
+
+            //using polly
+            var result = await _fallbackPolicy.ExecuteAsync(() => _retryPolicy.ExecuteAsync(() =>
+                CircuitBreakerPolicy().ExecuteAsync(() => httpClient.SendAsync(httpResponseMessage,cancellationToken))));
+
+            if (result.IsSuccessStatusCode)
+            {
+                var readDataAsString = await result.Content.ReadAsStringAsync();
+                var deserializeData = JsonConvert.DeserializeObject<TResult>(readDataAsString);
+                return new ResponseModel<TResult>
+                {
+                    IsSuccess = result.IsSuccessStatusCode,
+                    Message = result.ReasonPhrase,
+                    Code = result.StatusCode,
+                    Data = deserializeData
+                };
+            }
+            else
+            {
+                return new ResponseModel<TResult>
+                {
+                    IsSuccess = false,
                     Code = result.StatusCode,
                     Message = result.ReasonPhrase,
                     Data = null

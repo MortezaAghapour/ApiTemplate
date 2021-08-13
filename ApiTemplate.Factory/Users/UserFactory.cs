@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using ApiTemplate.Common.Markers.DependencyRegistrar;
 using ApiTemplate.Core.Entities.Users;
-using ApiTemplate.Mapper.Jwt;
+
 using ApiTemplate.Model.Commons;
 using ApiTemplate.Model.Jwt;
 using ApiTemplate.Model.Users;
@@ -25,9 +25,9 @@ namespace ApiTemplate.Factory.Users
         }
         #endregion
         #region Methods
-        public async Task<ResultViewModel<JwtReturnViewModel>> Login(LoginViewModel model)
+        public async Task<ReturnModel<JwtReturnModel>> Login(LoginModel model)
         {
-            var result = new ResultViewModel<JwtReturnViewModel>
+            var result = new ReturnModel<JwtReturnModel>
             {
                 IsSuccess = false
             };
@@ -55,13 +55,13 @@ namespace ApiTemplate.Factory.Users
 
             result.IsSuccess = true;
             var jwt = await _jwtService.Generate(user);
-            result.Data = JwtMapper.ToJwtReturnViewModel(jwt);
+            result.Data =jwt;
             return result;
         }
 
-        public async Task<ResultViewModel<EmptyViewModel>> Register(RegisterViewModel model)
+        public async Task<ReturnModel<EmptyModel>> Register(RegisterModel model)
         {
-            var result = new ResultViewModel<EmptyViewModel>
+            var result = new ReturnModel<EmptyModel>
             {
                 IsSuccess = false
             };

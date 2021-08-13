@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using ApiTemplate.Common.Exceptions;
 using ApiTemplate.Common.Markers.DependencyRegistrar;
@@ -78,6 +79,11 @@ namespace ApiTemplate.Service.Users
         public async Task UpdateLockoutToZero(AppUser user)
         {
             await _userManager.SetLockoutEndDateAsync(user, new DateTimeOffset(DateTime.UtcNow));
+        }
+
+        public async Task<AppUser> GetUserByHttpContextUser(ClaimsPrincipal httpContextUser)
+        {
+            return await _userManager.GetUserAsync(httpContextUser);
         }
 
         #endregion

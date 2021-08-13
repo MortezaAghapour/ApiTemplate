@@ -19,6 +19,8 @@ namespace ApiTemplate.Common.Enums.Exceptions
         [Display(Name = "خطای احراز هویت")]
         UnAuthorized = 6,
         [Display(Name = "پارامتر ورودی خالی می باشد")]
-        ArgumentNull
+        ArgumentNull  ,
+        [Display(Name = "خطایی نامعلوم رخ داده است")]
+        UnKnown
     }
 }

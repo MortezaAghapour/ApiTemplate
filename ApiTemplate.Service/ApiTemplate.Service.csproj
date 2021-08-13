@@ -16,6 +16,11 @@
   <ItemGroup>
     <ProjectReference Include="..\ApiTemplate.Core\ApiTemplate.Core.csproj" />
     <ProjectReference Include="..\ApiTemplate.Data\ApiTemplate.Data.csproj" />
+    <ProjectReference Include="..\ApiTemplate.Model\ApiTemplate.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Tasks\" />
   </ItemGroup>
 
 </Project>
