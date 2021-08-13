@@ -24,7 +24,7 @@ namespace ApiTemplate.Service.Weathers
         #endregion
 
         #region Methods
-              public async Task AddWeather(Weather weather, CancellationToken cancellationToken = default)
+        public async Task AddWeather(Weather weather, CancellationToken cancellationToken = default)
         {
             if (weather is null)
             {
@@ -36,6 +36,6 @@ namespace ApiTemplate.Service.Weathers
 
         #endregion
 
-       
+
     }
 }

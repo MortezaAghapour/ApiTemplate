@@ -11,5 +11,6 @@ namespace ApiTemplate.Core.Configurations.Weathers
         public string BaseUrl { get; set; }
         public string CurrentWeatherMethodName { get; set; }
         public string ForecastWeatherMethodName { get; set; }
+        public int SendWeatherInfoAfterMinute { get; set; }
     }
 }

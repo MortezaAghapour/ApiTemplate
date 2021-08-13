@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Hangfire" Version="1.7.24" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ApiTemplate.Mapper\ApiTemplate.Mapper.csproj" />
     <ProjectReference Include="..\ApiTemplate.Model\ApiTemplate.Model.csproj" />
     <ProjectReference Include="..\ApiTemplate.Service\ApiTemplate.Service.csproj" />

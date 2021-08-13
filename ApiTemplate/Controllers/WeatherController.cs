@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using ApiTemplate.Factory.Weathers;
 using ApiTemplate.Infrastructure.Extensions.ModelStates;
@@ -28,14 +29,25 @@ namespace ApiTemplate.Controllers
         #endregion
         #region Actions
         [HttpPost("CurrentWeatherByCity")]
-        public async Task<IActionResult> CurrentWeatherByCityName(CurrentWeatherByCityRequestModel model)
+        public async Task<IActionResult> CurrentWeatherByCityName(CurrentWeatherByCityRequestModel model,CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState.GetModelStateErrors());
             }
 
-            await _weatherFactory.GetCurrentWeatherInfoByCityName(model);
+            await _weatherFactory.GetCurrentWeatherInfoByCityName(model,cancellationToken);
+            return Ok();
+        }
+        [HttpPost("CurrentWeatherByLatLon")]
+        public async Task<IActionResult> CurrentWeatherByLatLonName(CurrentWeatherByLatLonRequestModel model,CancellationToken cancellationToken)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState.GetModelStateErrors());
+            }
+
+            await _weatherFactory.GetCurrentWeatherInfoByLatLonName(model,cancellationToken);
             return Ok();
         }
         #endregion

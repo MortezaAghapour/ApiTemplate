@@ -39,17 +39,17 @@ namespace ApiTemplate.Model.Weathers
           [JsonPropertyName("last_updated")]
         public string LastUpdated { get; set; }
         [JsonPropertyName("temp_c")]
-        public double TempC { get; set; }      
+        public float TempC { get; set; }      
         [JsonPropertyName("temp_f")]
-        public double TempF { get; set; }
+        public float TempF { get; set; }
         [JsonPropertyName("is_day")]
         public int IsDay { get; set; }
          [JsonPropertyName("condition")]
         public Condition Condition { get; set; } =new Condition();
           [JsonPropertyName("wind_mph")]
-        public double WindMph { get; set; }
+        public float WindMph { get; set; }
          [JsonPropertyName("wind_kph")]
-        public double WindKph { get; set; }
+        public float WindKph { get; set; }
           [JsonPropertyName("wind_degree")]
         public int WindDegree { get; set; }
           [JsonPropertyName("wind_dir")]
@@ -57,29 +57,29 @@ namespace ApiTemplate.Model.Weathers
           [JsonPropertyName("pressure_mb")]
         public double PressureMb { get; set; }
          [JsonPropertyName("pressure_in")]
-        public double PressureIn { get; set; }
+        public float PressureIn { get; set; }
           [JsonPropertyName("precip_mm")]
-        public double PrecipMm { get; set; }  
+        public float PrecipMm { get; set; }  
           [JsonPropertyName("precip_in")]
-        public double PrecipIn { get; set; } 
+        public float PrecipIn { get; set; } 
           [JsonPropertyName("humidity")]
         public int Humidity { get; set; }    
           [JsonPropertyName("cloud")]
         public int Cloud { get; set; }  
           [JsonPropertyName("feelslike_c")]
-        public double FeelslikeC { get; set; }   
+        public float FeelslikeC { get; set; }   
           [JsonPropertyName("feelslike_f")]
-        public double FeelslikeF { get; set; }     
+        public float FeelslikeF { get; set; }     
           [JsonPropertyName("vis_km")]
-        public double VisKm { get; set; }    
+        public float VisKm { get; set; }    
           [JsonPropertyName("vis_miles")]
-        public double Vis_Miles { get; set; }
+        public float Vis_Miles { get; set; }
           [JsonPropertyName("uv")]
-        public double Uv { get; set; }   
+        public float Uv { get; set; }   
           [JsonPropertyName("gust_mph")]
-        public double Gust_Mph { get; set; } 
+        public float Gust_Mph { get; set; } 
           [JsonPropertyName("gust_kph")]
-        public double GustKph { get; set; }
+        public float GustKph { get; set; }
     }
 
     public class Condition
